@@ -29,4 +29,5 @@ app.use((err: AppError, req: Request, res: Response, next: NextFunction) => {
         },
     });
 });
-app.listen(PORT);
+
+app.listen(PORT, () => console.log(`app started on port ${PORT}`));
