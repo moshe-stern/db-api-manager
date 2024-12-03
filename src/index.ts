@@ -1,9 +1,13 @@
 import express, { Response, Request, NextFunction } from "express";
 import twilio from "./routes/twilio";
 import providers from "./routes/providers";
-
+import dotenv from 'dotenv'
+const result = dotenv.config();
+if (result.error) {
+  console.error("Error loading .env file:", result.error);
+}
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT ? process.env.PORT : 8080;
 class AppError extends Error {
     status: number;
     isOperational: boolean;
