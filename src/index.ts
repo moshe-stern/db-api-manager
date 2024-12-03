@@ -8,7 +8,7 @@ if (result.error) {
 }
 const app = express();
 const PORT = process.env.PORT ? process.env.PORT : 8080;
-class AppError extends Error {
+export class AppError extends Error {
     status: number;
     isOperational: boolean;
     constructor(message: string, status: number) {
@@ -24,7 +24,7 @@ app.use((err: AppError, req: Request, res: Response, next: NextFunction) => {
     const statusCode = err.status || 500;
     const errorMessage = err.isOperational
         ? err.message
-        : 'Something went very wrong!';
+        : 'An unknown error occured';
 
     console.error('Error:', err);
     res.status(statusCode).json({

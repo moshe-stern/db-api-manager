@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { createClientResponseRecord, getClientByNumber } from '../services/twilio';
 import { IClientResponseRecord } from '../types';
+import { AppError } from '..';
 
 const router = express.Router();
 
@@ -20,7 +21,7 @@ router
         res.status(404).json({ message: "No records found for the provided phone number." });
       }
     } catch (error) {
-      next(error);
+      next(new AppError((error as Error).message, 500));
     }
   })
   .post(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -39,7 +40,7 @@ router
         res.status(500).json({ message: "Failed to create client record." });
       }
     } catch (error) {
-      next(error);
+      next(new AppError((error as Error).message, 500));
     }
   });
 

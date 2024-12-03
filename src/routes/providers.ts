@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { createClientResponseRecord, getClientByNumber } from '../services/twilio';
 import { IClientResponseRecord, IProvider } from '../types';
 import { getProvidersByEmails } from '../services/providers';
+import { AppError } from '..';
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.post('/providers-by-emails', async (req: Request, res: Response, next: Ne
       const providers: IProvider[] = await getProvidersByEmails(emails);
         res.status(200).json(providers);
     } catch (error) {
-      next(error);
+      next(new AppError((error as Error).message, 500));
     }
   });
   
