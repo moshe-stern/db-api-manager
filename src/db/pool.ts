@@ -1,9 +1,28 @@
 import { DefaultAzureCredential } from "@azure/identity";
 import sql from "mssql";
 let pool: sql.ConnectionPool | null = null;
-export async function getPool(): Promise<sql.ConnectionPool> {
+
+
+enum EDbNames {
+  attainDataLake = 'AttainDataLake',
+  attainDMAttainAutomation = 'AttainDM.AttainAutomation'
+}
+
+
+async function getCurrentDatabase(pool: sql.ConnectionPool): Promise<string> {
+  const result = await pool.query('SELECT DB_NAME() as CurrentDB');
+  return result.recordset[0]['CurrentDB']
+}
+
+
+
+async function getPool(dbName: EDbNames): Promise<sql.ConnectionPool> {
   if (pool) {
-    return pool;
+    const currDb = await getCurrentDatabase(pool)
+    if (dbName === currDb) {
+      return pool;
+    }
+    await pool.close()
   }
   const credential = new DefaultAzureCredential();
   const tokenResponse = await credential.getToken(
@@ -13,7 +32,7 @@ export async function getPool(): Promise<sql.ConnectionPool> {
     throw new Error("Enviroment not configured");
   const config: sql.config = {
     server: process.env.SERVER,
-    database: process.env.DB,
+    database: dbName,
     options: {
       encrypt: true,
     },
@@ -26,4 +45,9 @@ export async function getPool(): Promise<sql.ConnectionPool> {
   };
   pool = await sql.connect(config);
   return pool;
+}
+
+export {
+  getPool,
+  EDbNames
 }

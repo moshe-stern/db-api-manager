@@ -2,6 +2,7 @@ import express, { Response, Request, NextFunction } from "express";
 import twilio from "./routes/twilio";
 import providers from "./routes/providers";
 import dotenv from 'dotenv'
+import client from "./routes/client";
 const result = dotenv.config();
 if (result.error) {
   console.error("Error loading .env file:", result.error);
@@ -20,6 +21,7 @@ export class AppError extends Error {
 app.use(express.json())
 app.use("/twilio", twilio);
 app.use("/providers", providers)
+app.use("/client", client)
 app.use((err: AppError, req: Request, res: Response, next: NextFunction) => {
     const statusCode = err.status || 500;
     const errorMessage = err.isOperational

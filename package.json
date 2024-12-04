@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run build && node dist/src/index.js",
     "build": "tsc",
-    "start:local": "nodemon --watch src --ext ts --exec ts-node src/index.ts"
+    "start:local": "set DEBUG=express:* & nodemon --watch src --ext ts --exec ts-node src/index.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,10 +1,10 @@
-import { getPool } from "../db/pool";
+import { EDbNames, getPool } from "../db/pool";
 import sql from "mssql";
 import { IClientResponseRecord } from "../types";
 async function getClientByNumber(
   number: string,
 ): Promise<IClientResponseRecord[]> {
-  const pool = await getPool();
+  const pool = await getPool(EDbNames.attainDMAttainAutomation);
   const res = await pool.request().input("PhoneNumber", sql.VarChar(20), number)
     .query(`
         SELECT *
@@ -24,7 +24,7 @@ async function getClientByNumber(
 async function createClientResponseRecord(
   rec: Omit<IClientResponseRecord, "id">,
 ): Promise<number> {
-  const pool = await getPool();
+  const pool = await getPool(EDbNames.attainDMAttainAutomation);
   const res = await pool
     .request()
     .input("PhoneNumber", sql.VarChar(20), rec.phoneNumber)

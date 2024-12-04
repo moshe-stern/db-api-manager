@@ -1,10 +1,10 @@
-import { getPool } from "../db/pool"
+import { EDbNames, getPool } from "../db/pool"
 import { IProvider } from "../types"
 
 async function getProvidersByEmails(
     emails: string[]
 ): Promise<IProvider[]> {
-    const pool = await getPool()
+    const pool = await getPool(EDbNames.attainDMAttainAutomation)
     const res = await pool.query(
          `SELECT 
            p.[Provider Email Address], 
