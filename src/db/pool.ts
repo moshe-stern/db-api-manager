@@ -1,28 +1,19 @@
 import { DefaultAzureCredential } from "@azure/identity";
 import sql from "mssql";
-let pool: sql.ConnectionPool | null = null;
-
 
 enum EDbNames {
   attainDataLake = 'AttainDataLake',
   attainDMAttainAutomation = 'AttainDM.AttainAutomation'
 }
 
-
-async function getCurrentDatabase(pool: sql.ConnectionPool): Promise<string> {
-  const result = await pool.query('SELECT DB_NAME() as CurrentDB');
-  return result.recordset[0]['CurrentDB']
-}
-
-
+let pool: {[key in EDbNames]: sql.ConnectionPool | null} = {
+  [EDbNames.attainDataLake]: null,
+  [EDbNames.attainDMAttainAutomation]: null
+};
 
 async function getPool(dbName: EDbNames): Promise<sql.ConnectionPool> {
-  if (pool) {
-    const currDb = await getCurrentDatabase(pool)
-    if (dbName === currDb) {
-      return pool;
-    }
-    await pool.close()
+  if (pool[dbName]) {
+    return pool[dbName]
   }
   const credential = new DefaultAzureCredential();
   const tokenResponse = await credential.getToken(
@@ -43,8 +34,10 @@ async function getPool(dbName: EDbNames): Promise<sql.ConnectionPool> {
       },
     },
   };
-  pool = await sql.connect(config);
-  return pool;
+  const newPool = new sql.ConnectionPool(config);
+  await newPool.connect();
+  pool[dbName] = newPool;
+  return pool[dbName];
 }
 
 export {
