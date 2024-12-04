@@ -1,7 +1,7 @@
+import { IClientResponseRecord } from "attain-aba-shared";
 import { EDbNames, getPool } from "../db/pool";
 import sql from "mssql";
-import { IClientResponseRecord } from "../types";
-async function getClientByNumber(
+async function getClientResponseByPhoneNumber(
   number: string,
 ): Promise<IClientResponseRecord[]> {
   const pool = await getPool(EDbNames.attainDMAttainAutomation);
@@ -39,4 +39,4 @@ async function createClientResponseRecord(
   return res.rowsAffected.length;
 }
 
-export { createClientResponseRecord, getClientByNumber };
+export { createClientResponseRecord, getClientResponseByPhoneNumber };

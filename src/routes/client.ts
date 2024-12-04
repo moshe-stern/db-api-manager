@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { AppError } from '..';
-import { getClientOrgIdByPhoneNumber } from '../services/client';
+import { getClientByPhoneNumber } from '../services/client';
 
 const router = express.Router();
 
@@ -12,11 +12,11 @@ router.get('/', async (req: Request, res: Response, next: NextFunction): Promise
           res.status(400).json({ message: "Missing required parameter: phoneNumber" });
           return;
         }
-        const orgId = await getClientOrgIdByPhoneNumber(phoneNumber);
-        if (orgId) {
-          res.status(200).json(orgId);
+        const client = await getClientByPhoneNumber(phoneNumber);
+        if (client) {
+          res.status(200).json(client);
         } else {
-          res.status(404).json({ message: "No records found for the provided phone number." });
+          res.status(404).json({ message: "No client found for the provided phone number." });
         }
       } catch (error) {
         next(new AppError((error as Error).message, 500));

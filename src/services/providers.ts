@@ -1,5 +1,5 @@
+import { IProvider } from "attain-aba-shared"
 import { EDbNames, getPool } from "../db/pool"
-import { IProvider } from "../types"
 
 async function getProvidersByEmails(
     emails: string[]

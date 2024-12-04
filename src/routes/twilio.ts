@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { createClientResponseRecord, getClientByNumber } from '../services/twilio';
-import { IClientResponseRecord } from '../types';
+import { createClientResponseRecord, getClientResponseByPhoneNumber } from '../services/twilio';
 import { AppError } from '..';
+import { IClientResponseRecord } from 'attain-aba-shared';
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router
         res.status(400).json({ message: "Missing required parameter: phoneNumber" });
         return;
       }
-      const records = await getClientByNumber(phoneNumber);
+      const records = await getClientResponseByPhoneNumber(phoneNumber);
       if (records.length > 0) {
         res.status(200).json(records);
       } else {

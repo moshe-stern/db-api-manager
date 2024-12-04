@@ -1,8 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { createClientResponseRecord, getClientByNumber } from '../services/twilio';
-import { IClientResponseRecord, IProvider } from '../types';
 import { getProvidersByEmails } from '../services/providers';
 import { AppError } from '..';
+import { IProvider } from 'attain-aba-shared';
 
 const router = express.Router();
 
