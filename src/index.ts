@@ -20,13 +20,9 @@ export class AppError extends Error {
     this.isOperational = true;
   }
 }
-const corsOptions = {
-  origin: "*",
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
+
+app.use(cors());
 app.use(express.json());
-app.use(cors(corsOptions));
 app.use("/twilio", twilio);
 app.use("/providers", providers);
 app.use("/client", client);
