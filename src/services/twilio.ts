@@ -4,7 +4,7 @@ import sql from "mssql";
 async function getClientResponseByPhoneNumber(
   number: string,
 ): Promise<IClientResponseRecord[]> {
-  const pool = await getPool(EDbNames.attainDMAttainAutomation);
+  const pool = await getPool(EDbNames.AttainDMAttainAutomation);
   const res = await pool.request().input("PhoneNumber", sql.VarChar(20), number)
     .query(`
         SELECT *
@@ -24,7 +24,7 @@ async function getClientResponseByPhoneNumber(
 async function createClientResponseRecord(
   rec: Omit<IClientResponseRecord, "id">,
 ): Promise<number> {
-  const pool = await getPool(EDbNames.attainDMAttainAutomation);
+  const pool = await getPool(EDbNames.AttainDMAttainAutomation);
   const res = await pool
     .request()
     .input("PhoneNumber", sql.VarChar(20), rec.phoneNumber)
