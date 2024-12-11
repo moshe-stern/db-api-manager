@@ -24,11 +24,9 @@ router
         if (records.length > 0) {
           res.status(200).json(records);
         } else {
-          res
-            .status(404)
-            .json({
-              message: "No records found for the provided phone number.",
-            });
+          res.status(404).json({
+            message: "No records found for the provided phone number.",
+          });
         }
       } catch (error) {
         next(new AppError((error as Error).message, 500));

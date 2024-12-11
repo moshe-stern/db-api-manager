@@ -14,11 +14,9 @@ router.post(
         !Array.isArray(emails) ||
         emails.some((email) => typeof email !== "string")
       ) {
-        res
-          .status(400)
-          .json({
-            message: 'Invalid request. "emails" must be an array of strings.',
-          });
+        res.status(400).json({
+          message: 'Invalid request. "emails" must be an array of strings.',
+        });
         return;
       }
       const providers: IProvider[] = await getProvidersByEmails(emails);

@@ -4,6 +4,7 @@ import providers from "./routes/providers";
 import dotenv from "dotenv";
 import client from "./routes/client";
 import cubeStatus from "./routes/cube-status";
+import cors from "cors";
 const result = dotenv.config();
 if (result.error) {
   console.error("Error loading .env file:", result.error);
@@ -19,7 +20,13 @@ export class AppError extends Error {
     this.isOperational = true;
   }
 }
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 app.use(express.json());
+app.use(cors(corsOptions));
 app.use("/twilio", twilio);
 app.use("/providers", providers);
 app.use("/client", client);
