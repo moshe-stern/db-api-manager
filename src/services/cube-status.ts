@@ -24,4 +24,23 @@ async function getRefreshTimes() {
   return refreshTimes;
 }
 
-export { getRefreshTimes };
+async function getMsgBoard() {
+  const pool = await getPool(EDbNames.AttainDMAttainAutomation);
+  const res = await pool.query(`
+          SELECT TOP (1) [Message]
+          FROM [dbo].[MessageBoard]
+        `);
+  const set = res.recordset[0];
+  return set?.Message as string;
+}
+
+async function updateMsgBoard(msg: string) {
+  const pool = await getPool(EDbNames.AttainDMAttainAutomation);
+  const res = await pool.request().input("msg", msg).query(`
+                    update [dbo].[MessageBoard] 
+                    set [Message] = @msg
+              `);
+  return res.rowsAffected.length;
+}
+
+export { getRefreshTimes, getMsgBoard, updateMsgBoard };
