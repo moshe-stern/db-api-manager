@@ -1,10 +1,16 @@
 import express, { Request, Response, NextFunction } from "express";
+<<<<<<< HEAD
 import { AppError } from "../helpers";
 import {
   getMsgBoard,
   getRefreshTimes,
   updateMsgBoard,
 } from "../services/cube-status";
+=======
+import { AppError } from "..";
+import { getClientByPhoneNumber } from "../services/client";
+import { getRefreshTimes } from "../services/cube-status";
+>>>>>>> parent of 08b6f31 (added msg board)
 
 const router = express.Router();
 router.get(
@@ -19,6 +25,7 @@ router.get(
   },
 );
 
+<<<<<<< HEAD
 router
   .route("/message-board")
   .get(
@@ -46,4 +53,6 @@ router
       }
     },
   );
+=======
+>>>>>>> parent of 08b6f31 (added msg board)
 export default router;
