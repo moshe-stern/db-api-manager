@@ -4,7 +4,6 @@ import providers from "./routes/providers";
 import dotenv from "dotenv";
 import client from "./routes/client";
 import cubeStatus from "./routes/cube-status";
-import authRoute from "./routes/auth";
 import { auth, errorHandler } from "./helpers";
 const result = dotenv.config();
 if (result.error) {
@@ -14,7 +13,7 @@ const app = express();
 const PORT = process.env.PORT ? process.env.PORT : 8080;
 
 app.use(express.json());
-app.use("/auth", authRoute);
+// app.use("/auth", authRoute);
 app.use("/cube-status", cubeStatus);
 app.use(auth);
 app.use("/twilio", twilio);
