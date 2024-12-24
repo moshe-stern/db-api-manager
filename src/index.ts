@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import client from "./routes/client";
 import cubeStatus from "./routes/cube-status";
 import { auth, errorHandler } from "./helpers";
+import authRoute from './routes/auth'
 const result = dotenv.config();
 if (result.error) {
   console.error("Error loading .env file:", result.error);
@@ -13,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT ? process.env.PORT : 8080;
 
 app.use(express.json());
-// app.use("/auth", authRoute);
+app.use("/auth", authRoute);
 app.use("/cube-status", cubeStatus);
 app.use(auth);
 app.use("/twilio", twilio);
