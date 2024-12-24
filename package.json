@@ -17,8 +17,6 @@
     "attain-aba-shared": "^1.0.12",
     "dotenv": "^16.4.6",
     "express": "^4.21.1",
-    "jsonwebtoken": "^9.0.2",
-    "jwks-rsa": "^3.1.0",
     "lodash": "^4.17.21",
     "msnodesqlv8": "^4.4.0",
     "mssql": "^11.0.1",
