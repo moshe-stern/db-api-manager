@@ -34,7 +34,7 @@ router
   .patch(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
       try {
-        const { message } = req.body as { message: string};
+        const { message } = req.body as { message: string };
         const affected = await updateMsgBoard(message);
         if (affected > 0) {
           res.status(201).json({ message: "Succesfully updated message" });
