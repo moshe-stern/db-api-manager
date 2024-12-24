@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import { AppError } from "..";
+import { AppError } from "../helpers";
 import { getClientByPhoneNumber } from "../services/client";
 
 const router = express.Router();

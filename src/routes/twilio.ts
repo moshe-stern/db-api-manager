@@ -3,7 +3,7 @@ import {
   createClientResponseRecord,
   getClientResponseByPhoneNumber,
 } from "../services/twilio";
-import { AppError } from "..";
+import { AppError } from "../helpers";
 import { IClientResponseRecord } from "attain-aba-shared";
 
 const router = express.Router();

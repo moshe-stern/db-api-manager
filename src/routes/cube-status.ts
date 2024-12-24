@@ -1,6 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import { AppError } from "..";
-import { getClientByPhoneNumber } from "../services/client";
+import { AppError } from "../helpers";
 import {
   getMsgBoard,
   getRefreshTimes,

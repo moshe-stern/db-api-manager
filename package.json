@@ -15,9 +15,10 @@
     "@azure/identity": "^4.5.0",
     "@types/lodash": "^4.17.13",
     "attain-aba-shared": "^1.0.12",
-    "cors": "^2.8.5",
     "dotenv": "^16.4.6",
     "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0",
     "lodash": "^4.17.21",
     "msnodesqlv8": "^4.4.0",
     "mssql": "^11.0.1",
@@ -25,7 +26,6 @@
     "tedious": "^18.6.1"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/mssql": "^9.1.5",
     "@types/node": "^22.10.1",
