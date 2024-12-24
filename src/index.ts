@@ -14,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT ? process.env.PORT : 8080;
 
 app.use(express.json());
-// app.use("/auth", authRoute);
+app.use("/auth", authRoute);
 app.use("/cube-status", cubeStatus);
 app.use(auth);
 app.use("/twilio", twilio);
