@@ -14,7 +14,7 @@
   "dependencies": {
     "@azure/identity": "^4.5.0",
     "@types/lodash": "^4.17.13",
-    "attain-aba-shared": "^1.0.12",
+    "attain-aba-shared": "^1.0.20",
     "cors": "^2.8.5",
     "dotenv": "^16.4.6",
     "express": "^4.21.1",
