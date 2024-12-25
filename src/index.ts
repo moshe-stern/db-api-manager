@@ -5,8 +5,7 @@ import dotenv from "dotenv";
 import client from "./routes/client";
 import cubeStatus from "./routes/cube-status";
 import cors from "cors";
-import { auth } from "attain-aba-shared";
-import { errorHandler } from "./helpers";
+import { errorHandler, auth } from "./helpers";
 const result = dotenv.config();
 if (result.error) {
   console.error("Error loading .env file:", result.error);

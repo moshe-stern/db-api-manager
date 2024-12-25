@@ -21,10 +21,12 @@ function auth(req: Request, res: Response, next: NextFunction) {
   const secretKey = req.header("SECRET_KEY");
   const expectedKey = process.env.SECRET_KEY;
   if (!secretKey || secretKey !== expectedKey) {
-    res.status(403);
-    return;
+    res.status(403).json({
+      message: 'Unauthorized'
+    })
+  } else {
+    next()
   }
-  next();
 }
 
 export { errorHandler, auth };
