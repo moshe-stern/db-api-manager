@@ -1,11 +1,10 @@
 import express, { Request, Response, NextFunction } from "express";
-import { AppError } from "..";
-import { getClientByPhoneNumber } from "../services/client";
 import {
   getMsgBoard,
   getRefreshTimes,
   updateMsgBoard,
 } from "../services/cube-status";
+import { AppError } from "attain-aba-shared";
 
 const router = express.Router();
 router.get(

@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { getProvidersByEmails } from "../services/providers";
-import { AppError } from "..";
-import { IProvider } from "attain-aba-shared";
+import { AppError, IProvider } from "attain-aba-shared";
 
 const router = express.Router();
 
