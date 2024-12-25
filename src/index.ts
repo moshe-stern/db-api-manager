@@ -17,7 +17,7 @@ const PORT = process.env.PORT ? process.env.PORT : 8080;
 app.use(cors());
 app.use(express.json());
 app.use("/cube-status", cubeStatus);
-app.use(auth)
+app.use(auth);
 app.use("/twilio", twilio);
 app.use("/providers", providers);
 app.use("/client", client);
